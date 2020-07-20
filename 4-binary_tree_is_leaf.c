@@ -1,6 +1,7 @@
 #include "binary_trees.h"
 
-/* binary_tree_is_leaf - checks if the node given
+/**
+ * binary_tree_is_leaf - checks if the node given
  * has any children
  * @node: node input
  * Return: 1 if child || 0 if not
