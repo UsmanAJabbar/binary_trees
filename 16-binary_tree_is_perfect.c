@@ -36,4 +36,5 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	 *          - If tree is a leaf:
 	 *              - if expected_depth == current_depth, return 1. else return 0
 	 **/
+
 }
