@@ -87,4 +87,8 @@ heap_t *array_to_heap(int *array, size_t size);
 int heap_extract(heap_t **root);
 int *heap_to_sorted_array(heap_t *heap, size_t *size);
 
+/* Helpers */
+/* For file 16 (binary_tree_is_perfect) */
+int is_perfect(const binary_tree_t *tree, int expected, int current_depth);
+
 #endif
