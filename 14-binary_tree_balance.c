@@ -8,18 +8,17 @@
  */
 int binary_tree_balance(const binary_tree_t *tree)
 {
-	int r, l, balance;
+	int r, l;
 
-	if (!tree)
-		return (0);
+	if (ISLEAF(tree->right))
+		r = 1;
+	else
+		r = binary_tree_height(tree->right);
 
-	r = binary_tree_height(tree->right);
-	l = binary_tree_height(tree->left);
-	balance = l - r;
+	if (ISLEAF(tree->left))
+		l = 1;
+	else
+		l = binary_tree_height(tree->left);
 
-	/* Check false zeros */
-	if (balance == 0)
-		balance = ISLEAF(tree->left) - ISLEAF(tree->right);
-
-	return (balance);
+	return (l - r);
 }
