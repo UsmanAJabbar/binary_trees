@@ -2,13 +2,16 @@
 #include "9-binary_tree_height.c"
 
 /**
- * binary_tree_balance - checks if a tree is balanced
+ * binary_tree_balance - finds a tree balance factor
  * @tree: pointer to tree
- * Return: 1 if balanced | o if unbalanced or NULL
+ * Return: balance factor
  */
 int binary_tree_balance(const binary_tree_t *tree)
 {
 	int r, l;
+
+	if (!tree || ISLEAF(tree))
+		return (0);
 
 	if (ISLEAF(tree->right))
 		r = 1;
