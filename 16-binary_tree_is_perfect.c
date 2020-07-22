@@ -2,7 +2,7 @@
 #include "9-binary_tree_height.c"
 
 /**
- * binary_tree_is_perfect - checks if a tree is perfect
+ * binary_tree_is_perfect - function wrapper for is_perfect
  * @tree: pointer to tree
  * Return: 1 if perfect | 0 if not perfect
  **/
@@ -14,6 +14,13 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	return (is_perfect(tree, expected, 0));
 }
 
+/**
+ * is_perfect - checks if a tree is perfect
+ * @tree: pointer to tree
+ * @expected: expected depth for leaves
+ * @current_depth: current depth of tree
+ * Return: 1 if perfect | 0 if not perfect
+ **/
 int is_perfect(const binary_tree_t *tree, int expected, int current_depth)
 {
 	/* Check if it's a leaf. If so, check depth. Return result */
