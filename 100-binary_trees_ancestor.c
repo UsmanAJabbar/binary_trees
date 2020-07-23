@@ -6,7 +6,8 @@
  * @second: second tree node
  * Return: pointer to nearest ancestor node of first and second
  **/
-binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
+binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
+									const binary_tree_t *second)
 {
 	binary_tree_t *f_temp, *s_temp;
 
