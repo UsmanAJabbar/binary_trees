@@ -92,5 +92,6 @@ int *heap_to_sorted_array(heap_t *heap, size_t *size);
 int is_perfect(const binary_tree_t *tree, int expected, int current_depth);
 /* For file 101 (binary_tree_levelorder) */
 void traverse_level(const binary_tree_t *tree, int level, void (*func)(int));
-
+/* For file 110 (binary_tree_is_bst) */
+int validator(binary_tree_is_bst *left_node, int value);
 #endif
