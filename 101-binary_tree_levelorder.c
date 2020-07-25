@@ -9,15 +9,10 @@ void traverse_level(const binary_tree_t *tree, int level, void (*func)(int));
  **/
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
-	int height = binary_tree_height(tree);
-	int i;
+	int i, height = binary_tree_height(tree);
 
-	if (ISLEAF(tree))
-		func(tree->n);
-
-	else
-		for (i = 0; i < height + 1; i++)
-			traverse_level(tree, i, func);
+	for (i = 0; i < height + 1; i++)
+		traverse_level(tree, i, func);
 }
 
 /**
@@ -28,7 +23,7 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
  **/
 void traverse_level(const binary_tree_t *tree, int level, void (*func)(int))
 {
-	if (!tree)
+	if (!tree || !func)
 		return;
 
 	if (level == 0)

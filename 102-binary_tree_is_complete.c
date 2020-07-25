@@ -1,5 +1,7 @@
 #include "binary_trees.h"
 #include "9-binary_tree_height.c"
+
+int is_complete(const binary_tree_t *tree, int level, int reset);
 /**
  * binary_tree_is_complete - checks if tree is complete
  * @tree: pointer to tree
@@ -7,36 +9,54 @@
  **/
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	/* 1. Get height of tree ONCE. Store in expected variable. */
-	int expected = (int)binary_tree_height(tree);
+	int i, tmp = 1, height = binary_tree_height(tree);
 
-	return (is_complete(tree, expected, 0));
+	is_complete(NULL, 0, 1);
+
+	for (i = 0; i < height + 1 && tmp; i++)
+		tmp = is_complete(tree, i, 0);
+
+	is_complete(NULL, 0, 1);
+
+	return (tmp);
 }
 
 /**
- * is_complete - checks if a tree is complete
+ * is_complete - helper function for binary_tree_is_complete
  * @tree: pointer to tree
- * @expected: expected depth for leaves
- * @current_depth: current depth of tree
- * Return: 1 if complete | 0 if not complete
+ * @level: current level of treee
+ * @reset: reset variable
+ * Return: 1 if complete | 0 if not
  **/
-int is_complete(const binary_tree_t *tree, int expected, int current_depth)
+int is_complete(const binary_tree_t *tree, int level, int reset)
 {
-	/* Check if it's a leaf. If so, check depth. Return result */
-	if (ISLEAF(tree))
-		return (current_depth <= expected);
+	static int result, status;
+	binary_tree_t *left, *right;
 
-	/* Check if it's NULL or pointing to a NULL. If so, return 0 */
-	if (!tree || !tree->right || !tree->left)
+	if (reset)
+	{
+		result = 0;
+		status = 0;
 		return (0);
+	}
 
-	/* Check right side */
-	if (is_complete(tree->right, expected, current_depth + 1) == 0)
-		return (0);
+	if (!tree)
+		return (result);
 
-	/* Check left side */
-	if (is_complete(tree->left, expected, current_depth + 1) == 0)
-		return (0);
+	if (level == 0)
+	{
+		status = (ISLEAF(tree) || (tree->left && !tree->right));
+		if (status == 0)
+			result = (tree->right && tree->left);
+		else if (status == 1)
+			result = (ISLEAF(tree));
+		if (result == 0)
+			return (0);
+	}
 
-	return (1);
+	left = tree->left;
+	right = tree->right;
+	level = level - 1;
+
+	return (is_complete(left, level, 0) && is_complete(right, level, 0));
 }
