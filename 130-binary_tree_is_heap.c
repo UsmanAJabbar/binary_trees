@@ -18,9 +18,6 @@ int binary_tree_is_heap(const binary_tree_t *tree)
  **/
 int is_heap(const binary_tree_t *tree)
 {
-	if (!tree)
-		return (0);
-
 	if (tree->parent && tree->n >= tree->parent->n)
 		return (0);
 

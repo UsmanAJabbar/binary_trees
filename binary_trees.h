@@ -67,7 +67,7 @@ int binary_tree_is_perfect(const binary_tree_t *tree);
 
 /* ADVANCED TASK PROTOTYPES */
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
-									const binary_tree_t *second);
+									 const binary_tree_t *second);
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
 int binary_tree_is_complete(const binary_tree_t *tree);
 binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree);
@@ -96,5 +96,6 @@ void traverse_level(const binary_tree_t *tree, int level, void (*func)(int));
 /* For file 110 (binary_tree_is_bst) */
 int validator(binary_tree_t *left_node, int value);
 /* For file 102 (binary_tree_is_complete) */
-int is_complete(const binary_tree_t *tree, int expected, int current_depth);
+int is_complete(const binary_tree_t *tree, int level);
+
 #endif
