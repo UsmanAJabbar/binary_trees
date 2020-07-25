@@ -29,7 +29,7 @@ int is_bst(const binary_tree_t *tree, int min, int max)
 	if (tree->left)
 	{
 		child = tree->left->n;
-		if (child > tree->n || child > max || child < min)
+		if (child >= tree->n || child >= max || child <= min)
 			return (0);
 
 		if (is_bst(tree->left, min, tree->n) == 0)
@@ -39,7 +39,7 @@ int is_bst(const binary_tree_t *tree, int min, int max)
 	if (tree->right)
 	{
 		child = tree->right->n;
-		if (child < tree->n || child > max || child < min)
+		if (child <= tree->n || child >= max || child <= min)
 			return (0);
 
 		if (is_bst(tree->right, tree->n, max) == 0)
