@@ -2,49 +2,66 @@
 #include "113-bst_search.c"
 
 /**
- * bst_remove - removes a node from a binary search tree
+ * bst_remove - removes a replacement from a binary search tree
  * @root: pointer to tree
  * @value: value to remove
  * Return: pointer to root of tree
  **/
 bst_t *bst_remove(bst_t *root, int value)
 {
-	bst_t *tmp = bst_search(root, value);
-	bst_t *other;
+	bst_t *node = bst_search(root, value);
+	bst_t *replacement = inorder_successor(node);
 
-	if (!root || !tmp)
+	if (!root || !node)
 		return (NULL);
 
-	if (ISLEAF(tmp))
+	if (replacement)
 	{
-		if (tmp == root)
-		{
-			free(root);
-			return (NULL);
-		}
-
-		if (tmp->parent->left == tmp)
-			tmp->parent->left = NULL;
-		else
-			tmp->parent->right = NULL;
-
-		free(tmp);
-		return (root);
+		if (replacement->parent)
+			replacement->parent->left = replacement->right;
+		replacement->parent = node->parent;
+		replacement->left = node->left;
+		if (replacement->right)
+			replacement->right->parent = replacement->parent;
+		replacement->right = node->right;
 	}
 
-	if (tmp->left && tmp->right)
-		return (root);
+	if (node->right)
+		node->right->parent = replacement;
 
-	if (tmp->left)
-		other = tmp->left;
-	else
-		other = tmp->right;
+	if (node->left)
+		node->left->parent = replacement;
 
-	if (tmp->parent->left == tmp)
-		tmp->parent->left = other;
+	if (node == root)
+		root = replacement;
 	else
-		tmp->parent->right = other;
-	other->parent = tmp->parent;
-	free(tmp);
+	{
+		if (node->parent->left == node)
+			node->parent->left = replacement;
+		else
+			node->parent->right = replacement;
+	}
+
+	free(node);
 	return (root);
+}
+
+/**
+ * inorder_successor - returns pointer to inorder succesor of node
+ * @node: pointer to tree
+ * Return: pointer to inorder successor of node || NULL if doesn't exist
+ **/
+bst_t *inorder_successor(bst_t *node)
+{
+	if (!node || ISLEAF(node))
+		return (NULL);
+
+	if (!node->right)
+		return (node->left);
+
+	node = node->right;
+	while (node->left)
+		node = node->left;
+
+	return (node);
 }
