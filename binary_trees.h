@@ -99,6 +99,8 @@ int is_complete(const binary_tree_t *tree, int level);
 /* For file 110 (binary_tree_is_bst) */
 int is_bst(const binary_tree_t *tree, int min, int max);
 /* For file 114 (bst_remove) */
+void replace_child(bst_t *old_child, bst_t *new_child);
+void replace_parent(bst_t *node, bst_t *new_parent);
 bst_t *inorder_successor(bst_t *tree);
 /* For file 120 (binary_tree_is_avl) */
 int is_avl(const binary_tree_t *tree, int min, int max);
