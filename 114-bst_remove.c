@@ -15,7 +15,10 @@ bst_t *bst_remove(bst_t *root, int value)
 	if (!root || !node)
 		return (NULL);
 
-	if (replacer->parent != node)
+	if (root == node)
+		root = replacer;
+
+	if (replacer && replacer->parent != node)
 	{
 		replace_child(replacer, replacer->right);
 		replace_parent(replacer->right, replacer->parent);
@@ -29,8 +32,6 @@ bst_t *bst_remove(bst_t *root, int value)
 	replace_parent(node->left, replacer);
 	replace_parent(node->right, replacer);
 
-	if (root == node)
-		root = replacer;
 	free(node);
 	return (root);
 }
@@ -68,6 +69,9 @@ void replace_parent(bst_t *node, bst_t *new_parent)
  **/
 bst_t *inorder_successor(bst_t *node)
 {
+	if (!node)
+		return (NULL);
+
 	if (!node->right)
 		return (node->left);
 
